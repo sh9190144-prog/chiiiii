@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>for chiii 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --blush-light: #fef0f3;
+  --blush: #fad4df;
+  --rose: #e8a0b4;
+  --deep-rose: #c4607a;
+  --cream: #fdf7f4;
+  --petal-pink: #f9c8d5;
+  --text-dark: #3a1f2a;
+  --text-mid: #7a4058;
+  --text-soft: #b07888;
+  --gold: #d4956a;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--cream);
+  font-family: 'Lato', sans-serif;
+  color: var(--text-dark);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+/* ── Petals ── */
+.petals {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+.petal {
+  position: absolute;
+  top: -50px;
+  border-radius: 150% 0 150% 0;
+  opacity: 0;
+  animation: petalFall linear infinite;
+}
+@keyframes petalFall {
+  0%   { transform: translateX(0px)   rotate(0deg);   opacity: 0;   top: -50px; }
+  8%   { opacity: 0.75; }
+  85%  { opacity: 0.5; }
+  100% { transform: translateX(70px)  rotate(380deg); opacity: 0;   top: 108vh; }
+}
+
+/* ── Screens ── */
+.screen {
+  position: fixed; inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.75rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.85s ease;
+  z-index: 10;
+}
+.screen.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.screen.exit {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Intro ── */
+#intro {
+  background: radial-gradient(ellipse at 30% 20%, #fde8ef 0%, #fdf2f0 60%, #fcede8 100%);
+}
+.intro-bloom {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  animation: bloom 2.2s ease-in-out infinite;
+}
+@keyframes bloom {
+  0%, 100% { transform: scale(1) rotate(-3deg); }
+  50%       { transform: scale(1.12) rotate(3deg); }
+}
+.intro-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4.5rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--deep-rose);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+.intro-tagline {
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  margin-bottom: 3.5rem;
+}
+.begin-btn {
+  background: transparent;
+  border: 1.5px solid var(--rose);
+  color: var(--deep-rose);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.85rem 2.2rem;
+  border-radius: 100px;
+  cursor: pointer;
+  animation: pulseRing 2.5s ease-in-out infinite;
+}
+@keyframes pulseRing {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(196, 96, 122, 0.25); }
+  50%       { box-shadow: 0 0 0 10px rgba(196, 96, 122, 0); }
+}
+.begin-btn:active {
+  background: var(--rose);
+  color: white;
+}
+
+/* ── Letter card ── */
+.letter-card {
+  background: #fff;
+  border: 1px solid rgba(232, 160, 180, 0.3);
+  border-radius: 20px;
+  padding: 2.2rem 1.6rem;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  box-shadow: 0 8px 40px rgba(196, 96, 122, 0.08), 0 2px 12px rgba(196, 96, 122, 0.05);
+}
+.letter-numeral {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+.letter-divider {
+  width: 32px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--rose), transparent);
+}
+.letter-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.18rem;
+  line-height: 1.9;
+  font-weight: 300;
+  color: var(--text-dark);
+  text-align: center;
+}
+.letter-body em {
+  font-style: italic;
+  color: var(--deep-rose);
+}
+
+/* ── Progress + Nav ── */
+.nav-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 1.25rem;
+  width: 100%;
+}
+.dots {
+  display: flex;
+  gap: 5px;
+}
+.dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--blush);
+  transition: all 0.35s ease;
+}
+.dot.done  { background: var(--rose); opacity: 0.55; }
+.dot.active { background: var(--deep-rose); transform: scale(1.4); }
+
+.nxt {
+  background: transparent;
+  border: none;
+  color: var(--text-soft);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color 0.2s;
+}
+.nxt:active { color: var(--deep-rose); }
+.nxt-arrow { font-size: 0.9rem; }
+
+/* ── Final screen ── */
+#final {
+  background: radial-gradient(ellipse at 50% 30%, #fde8ef 0%, #fdf2f0 70%);
+}
+.final-flower { font-size: 2.5rem; margin-bottom: 1.5rem; }
+.final-q {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.1rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--deep-rose);
+  text-align: center;
+  line-height: 1.35;
+  margin-bottom: 0.6rem;
+}
+.final-hint {
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  text-align: center;
+  letter-spacing: 0.08em;
+  margin-bottom: 2.5rem;
+}
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  width: 100%;
+  max-width: 280px;
+}
+.btn-yes {
+  background: linear-gradient(135deg, #e8a0b0 0%, #c4607a 100%);
+  border: none;
+  color: white;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  padding: 1rem 1.5rem;
+  border-radius: 100px;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(196, 96, 122, 0.28);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-yes:active { transform: scale(0.96); box-shadow: 0 2px 10px rgba(196, 96, 122, 0.2); }
+.btn-also {
+  background: transparent;
+  border: 1.5px solid var(--rose);
+  color: var(--deep-rose);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-style: italic;
+  padding: 0.85rem 1.5rem;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-also:active { background: var(--blush); }
+
+/* ── Response screens ── */
+#res-yes, #res-maybe {
+  background: radial-gradient(ellipse at 40% 40%, #fde0ea 0%, #fdf4f0 70%);
+  text-align: center;
+}
+.res-emoji { font-size: 3.2rem; margin-bottom: 1.2rem; }
+.res-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.22rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--deep-rose);
+  line-height: 1.75;
+  max-width: 295px;
+}
+
+/* ── Music button ── */
+#music-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(232,160,180,0.4);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 12px rgba(196, 96, 122, 0.12);
+  transition: transform 0.2s;
+  opacity: 0;
+  pointer-events: none;
+}
+#music-btn.visible { opacity: 1; pointer-events: all; }
+#music-btn.playing { animation: spin 3s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div class="petals" id="petals"></div>
+
+<button id="music-btn" onclick="toggleMusic()" title="music">🎵</button>
+
+<!-- ════ INTRO ════ -->
+<div class="screen active" id="intro">
+  <div class="intro-bloom">🌸</div>
+  <div class="intro-name">chiii</div>
+  <div class="intro-tagline">maine socha tha akele maje karunga... and then there was you.</div>
+  <button class="begin-btn" onclick="begin()">tap to open</button>
+</div>
+
+<!-- ════ LETTER SCREENS ════ -->
+
+<div class="screen" id="s1">
+  <div class="letter-card">
+    <div class="letter-numeral">i</div>
+    <div class="letter-divider"></div>
+    <p class="letter-body">
+      you want to know the truth?<br><br>
+      <em>i like you. i like you a lot.</em> more than i've liked anyone for as long as i've lived. the way i feel for you is very rare — and tbh it kinda scares me, because i really don't wanna lose you or mess up whatever this is between us.<br><br>
+      but i've genuinely <em>fallen hard for you,</em> chiii.<br><br>
+      idk how i fell for you in these 20 days 😭
+    </p>
+    <div class="letter-divider"></div>
+  </div>
+  <div class="nav-row">
+    <div class="dots" id="d1"></div>
+    <button class="nxt" onclick="go('s2')">continue <span class="nxt-arrow">›</span></button>
+  </div>
+</div>
+
+<div class="screen" id="s2">
+  <div class="letter-card">
+    <div class="letter-numeral">ii</div>
+    <div class="letter-divider"></div>
+    <p class="letter-body">
+      and it's funny —<br><br>
+      i still remember when being called <em>"bbg"</em> used to lowkey irritate me 😭<br><br>
+      now somehow it became one of my <em>favorite things to hear from you.</em><br><br>
+      crazy how one person can make the most random things feel so special.
+    </p>
+    <div class="letter-divider"></div>
+  </div>
+  <div class="nav-row">
+    <div class="dots" id="d2"></div>
+    <button class="nxt" onclick="go('s3')">continue <span class="nxt-arrow">›</span></button>
+  </div>
+</div>
+
+<div class="screen" id="s3">
+  <div class="letter-card">
+    <div class="letter-numeral">iii</div>
+    <div class="letter-divider"></div>
+    <p class="letter-body">
+      what i feel for you isn't even just attraction anymore.<br><br>
+      it's more like an <em>obsession in the softest way possible.</em><br><br>
+      you randomly stay on my mind throughout the day without even trying. the smallest things remind me of you — and somehow you became such a big part of my thoughts without me even realizing when it happened.
+    </p>
+    <div class="letter-divider"></div>
+  </div>
+  <div class="nav-row">
+    <div class="dots" id="d3"></div>
+    <button class="nxt" onclick="go('s4')">continue <span class="nxt-arrow">›</span></button>
+  </div>
+</div>
+
+<div class="screen" id="s4">
+  <div class="letter-card">
+    <div class="letter-numeral">iv</div>
+    <div class="letter-divider"></div>
+    <p class="letter-body">
+      maybe this sounds cheesy as hell — because apparently humans evolved just to send each other reels for hours and accidentally catch feelings in the process 😭<br><br>
+      but it's true. <em>i smile whenever i see your text.</em> hearing your voice instantly makes my day better. even the smallest things from you stay in my head for hours.
+    </p>
+    <div class="letter-divider"></div>
+  </div>
+  <div class="nav-row">
+    <div class="dots" id="d4"></div>
+    <button class="nxt" onclick="go('s5')">continue <span class="nxt-arrow">›</span></button>
+  </div>
+</div>
+
+<div class="screen" id="s5">
+  <div class="letter-card">
+    <div class="letter-numeral">v</div>
+    <div class="letter-divider"></div>
+    <p class="letter-body">
+      like the way we go from pighalne wala emoji nonsense to suddenly having <em>actual deep conversations.</em><br><br>
+      the way you call me <em>lambude</em> and <em>shawty</em> like it's the most normal thing ever now.<br><br>
+      even your random yapping sessions — honestly one of my <em>favorite parts of the day.</em>
+    </p>
+    <div class="letter-divider"></div>
+  </div>
+  <div class="nav-row">
+    <div class="dots" id="d5"></div>
+    <button class="nxt" onclick="go('s6')">continue <span class="nxt-arrow">›</span></button>
+  </div>
+</div>
+
+<div class="screen" id="s6">
+  <div class="letter-card">
+    <div class="letter-numeral">vi</div>
+    <div class="letter-divider"></div>
+    <p class="letter-body">
+      i still laugh thinking about the mayo throwing conversation and you threatening to throw a joota at me 😭<br><br>
+      somehow even those dumb little moments <em>matter to me more than they should.</em><br><br>
+      you've become one of those people i can talk to for hours without it ever feeling forced or boring.
+    </p>
+    <div class="letter-divider"></div>
+  </div>
+  <div class="nav-row">
+    <div class="dots" id="d6"></div>
+    <button class="nxt" onclick="go('s7')">continue <span class="nxt-arrow">›</span></button>
+  </div>
+</div>
+
+<div class="screen" id="s7">
+  <div class="letter-card">
+    <div class="letter-numeral">vii</div>
+    <div class="letter-divider"></div>
+    <p class="letter-body">
+      and honestly — thank you.<br><br>
+      for changing my perspective from <em>"akele maje kro"</em> to actually wanting someone i can rely on.<br><br>
+      before you, i was completely fine on my own. but now you became <em>the person i wanna share things with first.</em> when something good happens. when life feels messy.
+    </p>
+    <div class="letter-divider"></div>
+  </div>
+  <div class="nav-row">
+    <div class="dots" id="d7"></div>
+    <button class="nxt" onclick="go('s8')">continue <span class="nxt-arrow">›</span></button>
+  </div>
+</div>
+
+<div class="screen" id="s8">
+  <div class="letter-card">
+    <div class="letter-numeral">viii</div>
+    <div class="letter-divider"></div>
+    <p class="letter-body">
+      i don't wanna rush things or make this awkward between us —<br><br>
+      because honestly, <em>what we already have means everything to me.</em><br><br>
+      i just wanted you to know that i care about you more than i probably know how to explain properly.
+    </p>
+    <div class="letter-divider"></div>
+  </div>
+  <div class="nav-row">
+    <div class="dots" id="d8"></div>
+    <button class="nxt" onclick="go('s9')">continue <span class="nxt-arrow">›</span></button>
+  </div>
+</div>
+
+<div class="screen" id="s9">
+  <div class="letter-card">
+    <div class="letter-numeral">ix</div>
+    <div class="letter-divider"></div>
+    <p class="letter-body">
+      and if life actually decides to be nice for once —<br><br>
+      <em>same iit. real future together.</em><br><br>
+      not just texts and late night conversations, but actual memories. movie nights. sitting under the stars. bullying each other over dumb things. and being there for each other. for real.
+    </p>
+    <div class="letter-divider"></div>
+  </div>
+  <div class="nav-row">
+    <div class="dots" id="d9"></div>
+    <button class="nxt" onclick="go('s10')">almost there <span class="nxt-arrow">›</span></button>
+  </div>
+</div>
+
+<div class="screen" id="s10">
+  <div class="letter-card">
+    <div class="letter-numeral">x</div>
+    <div class="letter-divider"></div>
+    <p class="letter-body" style="font-size:1.3rem; padding: 1rem 0;">
+      <em>when i think about the future —<br><br>you're somehow always there in it, chiii.</em>
+    </p>
+    <div class="letter-divider"></div>
+  </div>
+  <div class="nav-row">
+    <div class="dots" id="d10"></div>
+    <button class="nxt" onclick="go('final')">and so... <span class="nxt-arrow">›</span></button>
+  </div>
+</div>
+
+<!-- ════ FINAL ════ -->
+<div class="screen" id="final">
+  <div class="final-flower">🌸</div>
+  <div class="final-q">so, chiii...<br>what do you say?</div>
+  <div class="final-hint">dekh, jooth nahi bolunga — typing this was scarier than any mock test 😭</div>
+  <div class="choices">
+    <button class="btn-yes" onclick="go('res-yes')">yes, obviously 🥹</button>
+    <button class="btn-also" onclick="go('res-maybe')">i need time to think</button>
+  </div>
+</div>
+
+<!-- ════ RESPONSES ════ -->
+<div class="screen" id="res-yes">
+  <div class="res-emoji">🌸🥹🌸</div>
+  <p class="res-text">okay wait — i actually can't stop smiling right now. you have no idea what this means to me, chiii. we're gonna be so insufferable together and i genuinely cannot wait. 💗</p>
+  <p style="margin-top:1.5rem; font-family:'Lato',sans-serif; font-size:0.78rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-soft);">now text me back with whatever response you choose 🌸</p>
+</div>
+
+<div class="screen" id="res-maybe">
+  <div class="res-emoji">😭🌸</div>
+  <p class="res-text">that's okay. take all the time you need, chiii. i'm not going anywhere. what we have is already something i'm not willing to lose — so whenever you're ready, i'll be right here. 💗</p>
+  <p style="margin-top:1.5rem; font-family:'Lato',sans-serif; font-size:0.78rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--text-soft);">now text me back with whatever response you choose 🌸</p>
+</div>
+
+<script>
+const TOTAL = 10;
+
+/* ── Petals ── */
+const pc = document.getElementById('petals');
+const petalColors = [
+  ['#fde4ec','#f4a8c0'],['#fdd6e4','#f0b0c8'],['#fce8f0','#ebb8cc'],
+  ['#fdd8e8','#e8a8be'],['#fff0f5','#f4c0d0'],
+];
+for (let i = 0; i < 22; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  const c = petalColors[i % petalColors.length];
+  const sz = 8 + Math.random() * 10;
+  p.style.cssText = [
+    'left:' + Math.random()*100 + 'vw',
+    'width:' + sz + 'px',
+    'height:' + (sz * 1.3) + 'px',
+    'background:radial-gradient(ellipse at 35% 25%,' + c[0] + ',' + c[1] + ')',
+    'animation-duration:' + (9 + Math.random()*10) + 's',
+    'animation-delay:' + (Math.random()*14) + 's',
+    'opacity:0',
+  ].join(';');
+  pc.appendChild(p);
+}
+
+/* ── Dots builder ── */
+for (let i = 1; i <= TOTAL; i++) {
+  const el = document.getElementById('d' + i);
+  if (!el) continue;
+  for (let j = 1; j <= TOTAL; j++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (j < i ? ' done' : j === i ? ' active' : '');
+    el.appendChild(d);
+  }
+}
+
+/* ── Navigation ── */
+let current = 'intro';
+function go(id) {
+  const cur = document.getElementById(current);
+  if (cur) { cur.classList.remove('active'); cur.classList.add('exit'); setTimeout(() => cur.classList.remove('exit'), 900); }
+  setTimeout(() => {
+    const nxt = document.getElementById(id);
+    if (nxt) nxt.classList.add('active');
+    current = id;
+  }, 120);
+}
+
+function begin() {
+  startMusic();
+  document.getElementById('music-btn').classList.add('visible');
+  go('s1');
+}
+
+/* ── Web Audio gentle melody ── */
+let ctx = null, playing = false, nextLoop = null;
+
+function startMusic() {
+  if (playing) return;
+  playing = true;
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+  document.getElementById('music-btn').classList.add('playing');
+  scheduleMelody();
+}
+
+function toggleMusic() {
+  if (!ctx) { startMusic(); return; }
+  if (playing) {
+    ctx.suspend();
+    playing = false;
+    document.getElementById('music-btn').classList.remove('playing');
+  } else {
+    ctx.resume();
+    playing = true;
+    document.getElementById('music-btn').classList.add('playing');
+  }
+}
+
+function tone(freq, t, dur, vol, type) {
+  const osc = ctx.createOscillator();
+  const env = ctx.createGain();
+  const flt = ctx.createBiquadFilter();
+  flt.type = 'lowpass'; flt.frequency.value = 1800; flt.Q.value = 0.7;
+  osc.type = type || 'sine';
+  osc.frequency.value = freq;
+  env.gain.setValueAtTime(0, t);
+  env.gain.linearRampToValueAtTime(vol, t + 0.12);
+  env.gain.setValueAtTime(vol, t + dur - 0.18);
+  env.gain.linearRampToValueAtTime(0, t + dur + 0.05);
+  osc.connect(flt); flt.connect(env); env.connect(ctx.destination);
+  osc.start(t); osc.stop(t + dur + 0.1);
+}
+
+function scheduleMelody() {
+  if (!ctx) return;
+  const now = ctx.currentTime;
+  const b = 0.52;
+
+  // Melody — gentle D major arpeggio, evokes Khairiyat's mood
+  const mel = [
+    293.66, 369.99, 440.00, 493.88,
+    587.33, 493.88, 440.00, 369.99,
+    329.63, 392.00, 493.88, 587.33,
+    523.25, 440.00, 369.99, 293.66
+  ];
+  mel.forEach((f, i) => tone(f, now + i * b, b * 1.3, 0.045));
+
+  // Counter melody (higher register, softer)
+  const hi = [880, 0, 739.99, 0, 880, 0, 987.77, 0, 880, 0, 739.99, 0, 659.25, 0, 587.33, 0];
+  hi.forEach((f, i) => { if (f) tone(f, now + i * b + 0.1, b * 1.1, 0.022); });
+
+  // Soft bass pad
+  [146.83, 164.81, 130.81, 146.83].forEach((f, i) =>
+    tone(f, now + i * 4 * b, 4 * b * 0.9, 0.035, 'triangle')
+  );
+
+  const loopLen = mel.length * b;
+  nextLoop = setTimeout(scheduleMelody, (loopLen - 0.3) * 1000);
+}
+</script>
+</body>
+</html>
